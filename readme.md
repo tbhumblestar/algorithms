@@ -2,8 +2,8 @@
 - 푼 알고리즘 문제를 기록해두는 레포
 - H : 어려웠던 문제
 - G : 좋아서 다시 풀었으면 하는 문제
-- I : 그냥 중요
-- U : 못풀었음
+- U : 유용한 부분(개념, 메서드..)이 있음
+- F : 못풀었음
 
 #info
 - github(공식) : https://github.com/ndb796/python-for-coding-test
