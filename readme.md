@@ -1,6 +1,9 @@
 # Algorithm study repo
 - 푼 알고리즘 문제를 기록해두는 레포
-- 어려웠던 문제는 맨 앞에(H)를 기록
+- H : 어려웠던 문제
+- G : 좋아서 다시 풀었으면 하는 문제
+- I : 그냥 중요
+- U : 못풀었음
 
 #info
 - github(공식) : https://github.com/ndb796/python-for-coding-test

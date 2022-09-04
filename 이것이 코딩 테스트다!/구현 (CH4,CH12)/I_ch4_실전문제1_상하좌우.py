@@ -1,4 +1,12 @@
-#구현
+#문제종류 : 구현
+
+
+#풀이법 설명
+"""
+-각 움직임(LRUD)를 리스트를 사용해서 (+1,-1)과 같은 수식으로 정리
+-문제에서 제시한 조건(지도 밖으로 튀어나갈 수 없다)아래에서 움직임에 따른 수식을 더해주면 됨
+"""
+
 
 n= int(input())
 move_list = list(input().split())
@@ -22,6 +30,5 @@ for move in move_list:
     else:
         x += dx[move_dict[move]]
         y += dy[move_dict[move]]
-    print(x,y)
     
 print(x,y)
