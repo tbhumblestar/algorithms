@@ -14,37 +14,42 @@
 def solution(s):
 
     answer = len(s)
-    s_length = len(s)
-
     
-
-    for split_unit in range(1,s_length//2 + 1):
-
+    #전체 길이에서 1/2만해도 됨(그 이상은 어차피 전체 문자열과 값이 같음)
+    for step in range(1,len(s)//2 + 1):
+        
+        #압축된 문자열. 여기에 문자열을 조건에 맞게 더해간다
         compressed = ""
         
-        prev_letters = s[0:split_unit]
-
-        count = 1
-
-        for i in range(split_unit,s_length,split_unit):
-            # new_word = s[i:i+split_unit]
-
-            if prev_letters == s[i:i+split_unit]:
-                count += 1
+        #첫번째 문자열은 미리 만들어줌
+        prev_letters = s[0:step]
+        count =1 
+        
+        for i in range(step,len(s),step):
+            
+            #스텝마다 새 문자열 설정
+            new_word = s[i:i+step]
+            
+            #기존문자열과 새 문자열이 같을 경우 카운트만 추가
+            if prev_letters == new_word:
+                count +=1
+            #기존 문자열과 새 문자열이 다를 경우, 기존 문자열과 카운트를 압축된 문자열에 더해주고, 새 문자열을 기존 문자열(prev_letters)로 설정하고 카운트를 초기화
             else:
                 compressed += str(count) + prev_letters if count >=2 else prev_letters
-                prev_letters = s[i:i+split_unit]
+                prev_letters = new_word
                 count = 1
 
+        # 문자열의 마지막부분은 더해지지 않으므로, 끝자락에 더해준다.
         compressed += str(count) + prev_letters if count >=2 else prev_letters
-        print(compressed)
-        answer = min(answer,len(compressed))
-    
-    
-    return answer
         
+        answer = min(answer,len(compressed))
+        
+    return answer
+                
+                
 
 #테스트
 s = input()
 a = solution(s)
 print(a)
+        

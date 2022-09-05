@@ -8,35 +8,31 @@
 def solution(s):
 
     answer = len(s)
-    s_length = len(s)
-
     
-
-    for split_unit in range(1,s_length//2 + 1):
-
-        compressed = ""
+    for step in range(1,len(s)//2 + 1):
         
-        prev_letters = s[0:split_unit]
-
-        count = 1
-
-        for i in range(split_unit,s_length,split_unit):
-            # new_word = s[i:i+split_unit]
-
-            if prev_letters == s[i:i+split_unit]:
-                count += 1
+        compressed = ""
+        prev_letters = s[0:step]
+        
+        count =1 
+        
+        for i in range(step,len(s),step):
+            new_word = s[i:i+step]
+            
+            if prev_letters == new_word:
+                count +=1
             else:
                 compressed += str(count) + prev_letters if count >=2 else prev_letters
-                prev_letters = s[i:i+split_unit]
+                prev_letters = new_word
                 count = 1
-
-        compressed += str(count) + prev_letters if count >=2 else prev_letters
-        print(compressed)
-        answer = min(answer,len(compressed))
-    
-    
-    return answer
         
+        compressed += str(count) + prev_letters if count >=2 else prev_letters
+        
+        answer = min(answer,len(compressed))
+        
+    return answer
+                
+                
 
 #테스트
 s = input()
