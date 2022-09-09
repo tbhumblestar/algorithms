@@ -1,3 +1,11 @@
+#문제종류 : 구현
+#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/60059
+
+#유용한 부분(U)
+"""
+"""
+
+
 #
 
 #링크 : https://www.acmicpc.net/problem/3190
