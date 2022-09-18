@@ -1,6 +1,6 @@
 #
 
-#링크 : https://www.acmicpc.net/problem/3190
+#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/60061
 
 #풀이
 """
@@ -16,17 +16,11 @@
 -조건이 없다면, build_frame의 입력값에 따라 result를 그려주는 건 어렵지 않다
 -그러면 build_frame이 요구하는 케이스별로, 실행해도 되는지 여부를 체크해주면 됨
 -build_Frame이 요구하는 건 결국 2*2임. [설치or제거] * [바닥or보]
+-각 경우의 수에 대해서 체크해주면 됨
 """
 
 
-# n = int(input())
-# field = [[0]*n for _ in range(n)]
 
-#for local test build_frame input
-import json
-build_frame = json.loads(input())
-
-result = []
 
 def result_checker(result):
 
@@ -47,9 +41,9 @@ def result_checker(result):
             
             #보 + 기둥
             #보(앞에 2개) + 기둥(뒤에 1개)
-                for obj in result:
-                    if obj in [[x-1,y,1],[x,y,1],[x,y-1,0]]:
-                        broken += 1
+            for obj in result:
+                if obj in [[x-1,y,1],[x,y,1],[x,y-1,0]]:
+                    broken += 1
         
         #보
         if a == 1 :
@@ -73,9 +67,6 @@ def result_checker(result):
 
 #작업진행여부 체크함수
 def build_checker(frame,result):
-    
-    print("for_frame :",frame)
-    
     
     x = frame[0]
     y = frame[1]
@@ -104,7 +95,7 @@ def build_checker(frame,result):
         if result_checker(test_result):
             return True
         
-        print("삭제실패_result : ",result)
+
     
     #기둥 설치
     if a == 0 and b == 1:
@@ -127,36 +118,125 @@ def build_checker(frame,result):
             if obj in [[x,y-1,0],[x+1,y-1,0]]:
                 return True
     
-    print("build_checker :","False")
-    print("build_checker_result :",result)
     return False
 
 
-print(build_frame)
-
-#작업시작
-for frame in build_frame:
-    
-    
-    print(result)
-    #작업을 진행해도 되는 경우
-    if build_checker(frame,result):
-        print(result)
-        print("build_checker :","True")
+def solution(n,build_frame):
+    result = []
+    for frame in build_frame:
         
+        
+
+        #작업을 진행해도 되는 경우
+        if build_checker(frame,result):
+
+            
+            #삭제
+            if frame[3] == 0:
+                result = [i for i in result if i[0] != frame[0] or i[1] != frame[1] or i[2] != frame[2]]
+            
+            #설치
+            if frame[3] == 1:
+                result.append(frame[0:3])
+    
+    return sorted(result)
+        
+
+#for local test build_frame input
+n= 5
+# build_frame = [[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]
+build_frame = [[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]
+print(solution(n,build_frame))
+        
+
+
+
+
+#---------------------------------
+#아래는 다른 버전. 근데 시간초과 가 걸렷음
+
+def result_checker(result):
+
+    #각 구조물별로 괜찮은지 체크
+    for x,y,a in result:
+
+        broken = 0
+        
+        #기둥
+        if a == 0:
+
+            if y == 0:
+                broken += 1
+            
+            #보 + 기둥
+            #보(앞에 2개) + 기둥(뒤에 1개)
+            for obj in result:
+                if obj in [[x-1,y,1],[x,y,1],[x,y-1,0]]:
+                    print(obj)
+                    print(x-1,y,1)
+                    broken += 1
+        
+        #보
+        if a == 1 :
+        
+            #보가 있는지 확인
+            if [x-1,y,1] in result and [x+1,y,1] in result:
+                broken += 1
+            
+            #기둥이 있는지 확인
+            for obj in result:
+                if obj in [[x,y-1,0],[x+1,y-1,0]]:
+                    broken += 1
+            
+        
+        #부서진다면 > False
+        if broken == 0:
+            print("frame 실패")
+            return False
+    
+    #OK이면 True
+    print("frame 성공")
+    return True
+        
+
+
+def solution(n,build_frame):
+    result = set()
+    for frame in build_frame:
+        print("frame : ",frame)
+
+    
         #삭제
         if frame[3] == 0:
-            result = [i for i in result if i[0] != frame[0] or i[1] != frame[1] or i[2] != frame[2]]
+
+            test_result = [i for i in result if i[0] != frame[0] or i[1] != frame[1] or i[2] != frame[2]]
+            
+            if result_checker(test_result):
+                result = [i for i in result if i[0] != frame[0] or i[1] != frame[1] or i[2] != frame[2]]
         
         #설치
         if frame[3] == 1:
-            result.append(frame[0:3])
+            test_result = result[:]
+            test_result.append(frame[0:3])
+
+            if result_checker(test_result):
+                result.append(frame[0:3])
             
+        print("result : ",result)
+    result.sort(key=lambda x:(x[0],x[1],x[2]))
+    
+    return sorted(result)
+    
         
-        print("for_result :",result)
-            
+
+#for local test build_frame input
+
+n= 5
+build_frame = [[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]
+# build_frame = [[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]
+# build_frame = [[0,2,1,1],[2,0,0,1]]
         
-print(sorted(result))
+print(solution(n,build_frame))
         
 #1 [[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]
 #2 [[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]
