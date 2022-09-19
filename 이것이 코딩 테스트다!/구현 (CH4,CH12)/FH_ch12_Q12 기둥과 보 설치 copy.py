@@ -139,6 +139,7 @@ def solution(n,build_frame):
             if frame[3] == 1:
                 result.append(frame[0:3])
     
+    result.sort(key=lambda x:(x[0],x[1],x[2]))
     return sorted(result)
         
 
