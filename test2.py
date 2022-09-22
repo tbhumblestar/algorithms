@@ -1,12 +1,11 @@
-#순열
-from itertools import combinations, permutations
+dist = [1,2,3,4,5]
+#이터레이터 생성
+dist_iter = dist.__iter__()
+print(dist_iter) # 이터레이터 확인
 
-data = [(1, 2), (2, 2), (3, 4)]
-
-#permutaions
-permutations_result = list(permutations(data,2))
-print("permutations_result : ",permutations_result)
-
-#combinations
-combinations_result = list(combinations(data,2))
-print("combinations_result : ",combinations_result)
+while True:
+    try:
+        print(dist_iter.__next__())
+    except StopIteration as e:
+        break
+print("breaked")
