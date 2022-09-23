@@ -6,47 +6,47 @@
 - 값들이 전부 1로 변할때까지 직접적으로 실행해야 하는 재귀함수의 횟수를 카운트
 """
 
+#n:세로, m:가로
 n,m = map(int,input().split())
 field = []
 for i in range(n):
+    
+
     field.append(list(map(int,input())))
 
-#시작
-def dfs(x,y) -> None:
-    
-    if x <= -1 or x >= n or y <= -1 or y >= m:
-        return False
-    
-    
-    
-    field[x][y] = 1
-    dfs(x,y-1)
-    dfs(x,y+1)
-    dfs(x-1,y)
-    dfs(x+1,y)
-    return False
+
+from collections import deque
+
+queue = deque([[0,0]])
 
 
-count = 0
+#동,서,남,북
+#x : 세로 , y : 가로
+dx = [0,0,+1,-1]
+dy = [1,-1,0,0]
 
-for x in range(n):
-    for y in range(m):
-        if field[x][y] == 0:
-            print(x,y)
-            count += 1
-            dfs(x,y)
+while queue:
+    x,y = queue.popleft()
+    
+    for i in range(4):
+        n_x = x + dx[i]
+        n_y = y +dy[i]
+    
+        if n_x < 0 or n_x >n-1 or n_y < 0 or n_y > m-1:
+            continue
+        
+        if field[n_x][n_y] == 1:
+            queue.append([n_x,n_y])
+            field[n_x][n_y] += field[x][y]
 
-print(count)
+
+print(field)
+print(field[n-1][m-1])
 
 #testcase
-# 4 5
-# 00110
-# 00011
-# 11111
-# 00000
-
-#testcase2
-# 3 3
-# 001
-# 010
-# 101
+# 5 6
+# 101010
+# 111111
+# 000001
+# 111111
+# 111111
