@@ -46,14 +46,14 @@ def dfs(x,y,test_field):
         if nx <0 or nx > n-1 or ny <0 or ny > m-1:
             continue
         
-
+        print(test_field)
         if test_field[nx][ny] == 0:
             test_field[nx][ny] = 2
-
+            print(test_field)
             dfs(nx,ny,test_field)
             
 #시작
-
+print(field)
 
 for new_walls in combinations(can_build_wall_place,3):
     test_field = [item[:] for item in field]
@@ -71,12 +71,14 @@ for new_walls in combinations(can_build_wall_place,3):
             if test_field[x][y] == 0:
                 count += 1
     
-
+    # print("test_field :",test_field)
+    # print("count :",count)
                 
     max_place = max(max_place,count)
+print(virus_place)
 print(max_place)
         
-
+# print(max_place)
     
 #testcase1
 # 4 6
