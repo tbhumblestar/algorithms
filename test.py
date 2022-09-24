@@ -1,4 +1,4 @@
-#링크 : https://www.acmicpc.net/problem/14502
+#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/60062?language=python3
 
 #풀이
 """
@@ -9,8 +9,8 @@
 
 from itertools import combinations
 
-#n=가로, m=세로
-n,m = map(int,input().split())
+#n=
+n,k = map(int,input().split())
 
 field = []
 
@@ -38,22 +38,23 @@ dx = [0,0,1,-1]
 dy = [1,-1,0,0]
 
 def dfs(x,y,test_field):
+    print("in_dfs!")
     
     for i in range(4):
         nx = x + dx[i]
         ny = y + dy[i]
 
-        if nx <0 or nx > n-1 or ny <0 or ny > m-1:
+        if nx <0 or nx > n-1 or ny <0 or ny > n-1:
             continue
         
-
+            print(test_field)
         if test_field[nx][ny] == 0:
             test_field[nx][ny] = 2
-
+            print(test_field)
             dfs(nx,ny,test_field)
             
 #시작
-
+print(field)
 
 for new_walls in combinations(can_build_wall_place,3):
     test_field = [item[:] for item in field]
@@ -71,12 +72,14 @@ for new_walls in combinations(can_build_wall_place,3):
             if test_field[x][y] == 0:
                 count += 1
     
-
+    # print("test_field :",test_field)
+    # print("count :",count)
                 
     max_place = max(max_place,count)
+print(virus_place)
 print(max_place)
         
-
+# print(max_place)
     
 #testcase1
 # 4 6
