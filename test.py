@@ -1,89 +1,76 @@
-#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/60062?language=python3
-
-#풀이
-"""
-- M,N의 개수가 작음 > 완전탐색
-- 막을 수 있는 벽의 경우의 수를 Combination으로 구한다음
-- 각 케이스별로 DFS를 구함
-"""
-
-from itertools import combinations
-
-#n=
-n,k = map(int,input().split())
-
-field = []
-
-#0은 빈칸, 1은 벽, 2는 바이러스
-for i in range(n):
-    field.append(list(map(int,input().split())))
-
-max_place = 0
-
-can_build_wall_place = []
-
-for x in range(n):
-    for y in range(m):
-        if field[x][y] == 0:
-            can_build_wall_place.append((x,y))
-
-virus_place =[]
-for x in range(n):
-    for y in range(m):
-        if field[x][y] == 2:
-            virus_place.append((x,y))
-
-
-dx = [0,0,1,-1]
-dy = [1,-1,0,0]
-
-def dfs(x,y,test_field):
-    print("in_dfs!")
+def str_to_datetime_changer(str_datetime):
+    year = int(str_datetime[:4])
+    month = int(str_datetime[5:7])
+    day = int(str_datetime[8:])
     
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
+    return [year,month,day]
 
-        if nx <0 or nx > n-1 or ny <0 or ny > n-1:
-            continue
+
+
+def solution(today, terms, privacies):
+    
+    #오늘
+    today = str_to_datetime_changer(today)
+    
+    print("today :",today)
+    
+    #terms
+    terms_dict = {}
+    for i in terms:
+        terms_dict[i[0]] = int(i[2:])
+    
+    #privacies
+    privacies_list = []
+    for i in privacies:
+        day = str_to_datetime_changer(i[:-2])
+        add_month = terms_dict[i[-1]]
         
-            print(test_field)
-        if test_field[nx][ny] == 0:
-            test_field[nx][ny] = 2
-            print(test_field)
-            dfs(nx,ny,test_field)
-            
-#시작
-print(field)
+        if day[1] + add_month > 12:
+            day[0] += (day[1]+add_month) // 12
+            day[1] = (day[1] + add_month) % 12
+        
+        else:
+            day[1] += add_month
+        
+        if day[2] == 1:
+            day[2] = 28
+            day[1] -= 1
+            if day[1] == 0:
+                day[0] -= 1
+                day[1] = 12
+        else:
+            day[2] -= 1
+        
+        privacies_list.append(day)
 
-for new_walls in combinations(can_build_wall_place,3):
-    test_field = [item[:] for item in field]
-    
-    for x,y in new_walls:
-        test_field[x][y] = 1
+    print("privacies_list :",privacies_list)
         
-    for x,y in virus_place:
-        dfs(x,y,test_field)
-    
-    count = 0
-    
-    for x in range(n):
-        for y in range(m):
-            if test_field[x][y] == 0:
-                count += 1
-    
-    # print("test_field :",test_field)
-    # print("count :",count)
-                
-    max_place = max(max_place,count)
-print(virus_place)
-print(max_place)
+    answer = []
+    for i,v in enumerate(privacies_list):
+        if today[0] > v[0]:
+            answer.append(i+1)
         
-# print(max_place)
-    
-#testcase1
-# 4 6
-# 0 0 0 0 0 0
-# 1 0 0 0 0 2
-# 1 1 1 0 0 2
-# 0 0 0 0 0 2
+        if today[0] == v[0]:
+            if today[1] > v[1]:
+                answer.append(i+1)
+
+            if today[1] == v[1]:
+                if today[2] > v[2]:
+                    answer.append(i+1)
+
+    return answer
+
+
+
+#실행
+#case1
+# today,terms,privacies = "2022.05.19", ["A 6", "B 12", "C 3"], ["2021.05.02 A", "2021.07.01 B", "2022.02.19 C", "2022.02.20 C"]
+
+#case2
+# today,terms,privacies = "2020.01.01", ["Z 3", "D 5"], ["2019.01.01 D", "2019.11.15 Z", "2019.08.02 D", "2019.07.01 D", "2018.12.28 Z"]
+
+# case3
+today,terms,privacies = "2022.05.19", ["A 6", "B 12", "C 3","D 1"], ["2014.12.03 D", "2015.07.01 B", "2015.02.19 C", "2015.02.20 C"]
+
+result = solution(today,terms,privacies)
+print(result)
