@@ -40,8 +40,6 @@ empty_places = [i for i in empty_places if i not in student_places + teacher_pla
 dx = [0,0,-1,1]
 dy = [1,-1,0,0]
 
-print(teacher_places)
-
 def dfs(x,y,count,test_field,direction):
     
     global surv
@@ -93,8 +91,8 @@ for w1,w2,w3 in combinations(empty_places,3):
         # print(test_field)
     
     if surv:
-        print("true!")
-        print(test_field)
+        # print("true!")
+        # print(test_field)
         break
 
 if surv:
