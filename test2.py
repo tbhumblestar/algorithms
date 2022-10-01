@@ -1,4 +1,2 @@
-a = (1,2)
-x,y = a
-print(x,y)
-print(a[0])
+if 3 < 5 < 7:
+    print("h")

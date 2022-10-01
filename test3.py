@@ -1,12 +1,3 @@
-#링크 : https://www.acmicpc.net/problem/16234
-
-#풀이
-"""
-- DFS, BFS 두가지를 구현
-    - DFS(재귀함수)로는 한 회차 내에서 인구이동시킬 나라가 있는지, 어느나라를 이동시킬지 체크
-    - BFS는 회차를 카운트
-"""
-
 import sys
 sys.setrecursionlimit(100000)
 
@@ -56,7 +47,7 @@ def dfs_chekcer(x,y,test_field,check_num,position_dict):
         if test_field[nx][ny] != 0:
             continue
         
-        if L <= abs(field[x][y] - field[nx][ny]) <= R:
+        if L <= abs(field[x][y] - field[nx][ny]) and abs(field[x][y] - field[nx][ny]) <= R:
             dfs_chekcer(nx,ny,test_field,check_num,position_dict)
             
 
@@ -64,15 +55,9 @@ def bfs(count,field):
     
     test_field = [[0] * n for _ in range(n)]
     position_dict= {}
-    check_num = 0
     for x in range(n):
         for y in range(n):
-            
-            #이거 해주는 게 dfs_checker의 실행을 최소화 시킴
-            if test_field[x][y] != 0 :
-                continue
-            
-            check_num += 1
+            check_num = '0' + str(x) + '0' + str(y)
             dfs_chekcer(x,y,test_field,check_num,position_dict)
             
     go = False
@@ -87,7 +72,7 @@ def bfs(count,field):
 
             for x,y in v:
                 field[x][y] = pop_sum // length
-        
+            
     if go:
         bfs(count+1,field)
     else:
