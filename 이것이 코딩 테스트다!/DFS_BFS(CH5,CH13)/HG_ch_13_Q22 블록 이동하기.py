@@ -83,7 +83,7 @@ def bfs(field):
     queue.append([0,0,0,0])
     
     while queue:
-        # print("queue :",queue)
+        print("queue :",queue)
         
         #기계머리. 항상 꼬리보다 위쪽 혹은 왼쪽에 위치
         x1,y1,direction,count = queue.popleft()
@@ -93,8 +93,6 @@ def bfs(field):
         # print("x,y :",x1,y1)
         
         
-        
-        
         #방문표시
         visited[direction][x1][y1] = 2
         
@@ -102,11 +100,11 @@ def bfs(field):
         x2 = x1 if direction == 0 else x1+1
         y2 = y1+1 if direction == 0 else y1
         
+        #도착
         if x1 == n-1 and y1 == n-1:
-            return count
-            
+            break
         if x2 == n-1 and y2 == n-1:
-            return count
+            break
         
         #단순이동
         for i in range(4):
@@ -129,17 +127,6 @@ def bfs(field):
             if visited[direction][nx1][ny1] != 0:
                 continue
             
-            nx2 = nx1 if direction == 0 else nx1+1
-            ny2 = ny1+1 if direction == 0 else ny1
-            
-            # print(nx1,ny1,nx2,ny2)
-            #도착
-            if nx1 == n-1 and ny1 == n-1:
-                return count +1
-            
-            if nx2 == n-1 and ny2 == n-1:
-                return count +1
-            
         
             # print(f"{nx1}, {ny1}, {direction} 큐 추가")
             queue.append([nx1,ny1,direction,count+1])
@@ -155,18 +142,6 @@ def bfs(field):
             #방문한 곳이면 안가도 됨
             if visited[direction][nx1][ny1] != 0:
                 continue
-            
-            nx2 = nx1 if direction == 0 else nx1+1
-            ny2 = ny1+1 if direction == 0 else ny1
-            
-            # print(nx1,ny1,nx2,ny2)
-            #도착
-            if nx1 == n-1 and ny1 == n-1:
-                return count +1
-            
-            if nx2 == n-1 and ny2 == n-1:
-                return count +1
-            
             queue.append([nx1,ny1,direction,count+1])
             
     return count     
