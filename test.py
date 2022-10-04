@@ -1,24 +1,20 @@
-def checker(word):
-    length = len(word)
-    
-    for i in range(length):
-        if word[i] != word[-i-1]:
-            return False
-        
-    return True
+letters = input()
 
-n = int(input())
-for i in range(n):
-    word = input()
-    if checker(word):
-        print(f"#{i+1} YES")
-    else:
-        print(f"#{i+1} NO")
+num = ''
+
+for let in letters:
+    if let in '0123456789':
+        num += let
+
+num = int(num)
+print(num)
+
+count = 0
+
+for i in range(1,num+1):
+    if num % i == 0 :
+        count +=1
         
+print(count)
 #testcase
-# 5
-# level
-# moon
-# abcba 
-# soon 
-# gooG
+#g0en2Ts8eSoft
