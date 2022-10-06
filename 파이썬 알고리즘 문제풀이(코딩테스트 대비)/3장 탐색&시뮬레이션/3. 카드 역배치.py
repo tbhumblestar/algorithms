@@ -10,7 +10,7 @@ for i in range(10):
         lst[n1-1+j] = test_lst[j]
     print(test_lst)
     
-    print(lst.join())
+    print(lst)
         
 #test
 # 5 10
