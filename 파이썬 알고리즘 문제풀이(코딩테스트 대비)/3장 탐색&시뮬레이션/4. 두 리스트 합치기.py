@@ -1,8 +1,8 @@
 n1 = input()
-lst1 = list(map(int,input().split()))
+lst1 = list(map(int,input.split()))
 
 n2 = input()
-lst2 = list(map(int,input().split()))
+lst2 = list(map(int,input.split()))
 
 lst = lst1 + lst2
 lst.sort()
