@@ -5,8 +5,6 @@ B = list(map(int,input().split()))
 
 A.sort()
 B.sort(reverse=True)
-print(A)
-print(B)
 
 sum = 0
 
