@@ -1,5 +1,7 @@
 #문제종류 : 정렬
 
+#링크 : https://www.acmicpc.net/problem/18310
+
 #유용한 부분(U)
 """
 
@@ -8,52 +10,19 @@
 
 #풀이법 설명
 """
--네개의 조건 > 키를 바꿔가면서 정렬을 4번함
+-완전탐색을 시도햇으나 실패(시간초과)
+-결국 해법은 중간값을 가져오는 것
+-왜 중간값이냐?
+    안테나를 설치할 때 왼쪽으로 이동한 다는 것은, 기준점에서 왼쪽에 있는 집들의 거리가 가까워진다는 뜻이고 오른쪽에 있는 집들의 거리가 멀어진다는 뜻임. 즉, 왼쪽에 있는 집이 더 많다는 것
+    결국 최적의 중간값은 오른쪽으로도, 왼쪽으로도 이동할 이유가 없다는 뜻이고, 이는 왼쪽과 오른쪽에 있는 집들의 개수가 똑같다는 말임
 """
 
 n = int(input())
-lst = []
-for i in range(n):
-    lst.append(tuple(input().split()))
-
-
-lst.sort(key=lambda x:x[0])
-# print("1. ",lst)
-# print()
-# print()
-
-#수학감소(내림차순)
-lst.sort(key=lambda x:int(x[3]),reverse=True)
-# print("2. ",lst)
-# print()
-# print()
-
-#영어 증가(오름차순)
-lst.sort(key=lambda x:int(x[2]))
-# print("3. ",lst)
-# print()
-# print()
-
-#국어감소(내림차순)
-lst.sort(key=lambda x:int(x[1]),reverse=True)
-# print("4. ",lst)
-# 
-for i in lst:
-    print(i[0])
-
-
-
+lst = list(map(int,input().split()))
+lst.sort()
+length = len(lst)
+mid_index = ((length -1 )// 2)
+print(lst[mid_index])
 # testcase
-# 12
-# Junkyu 50 60 100
-# Sangkeun 80 60 50
-# Sunyoung 80 70 100
-# Soong 50 60 90
-# Haebin 50 60 100
-# Kangsoo 60 80 100
-# Donghyuk 80 60 100
-# Sei 70 70 70
-# Wonseob 70 70 90
-# Sanghyun 70 70 80
-# nsj 80 80 80
-# Taewhan 50 60 90
+# 4
+# 5 1 7 9
