@@ -5,16 +5,7 @@
 """
 -사이즈들 전체를 순회하면서, 가장 큰 변의 길이를 비교를 통해 얻고 + 지갑마다 작은 변을 리스트에 기록
 -가장 큰 변의 길이가 상자의 가로가 되고, 작은 변을 기록한 리스트들 중 가장 큰 값이 세로 변이 됨
-
-#추가
-다른풀이
--잘 생각해보면 지갑의 두변 중 큰거중에 가장 큰거 중에 가장 큰 거 * 작은 거 중에 가장 작은 거임..
--그래서 이렇게도 된다..-
-
-def solution(sizes):
-    return max(max(x) for x in sizes) * max(min(x) for x in sizes)
-
-
+-이때 가장 큰 변의 길이를 가진 지갑의 나머지 변이, 기록된 작은 변들 중 가장 큰 값인지도 체크해야 함
 """
 
 def solution(sizes):
@@ -42,17 +33,17 @@ def solution(sizes):
     answer = max_size*min_length_max
     return answer
 
-# #t1
-# sizes = [[60, 50], [30, 70], [60, 30], [80, 40]]
-# #ans = 4000
+#t1
+sizes = [[60, 50], [30, 70], [60, 30], [80, 40]]
+#ans = 4000
 
-# #t2
+#t2
 # sizes = [[10, 7], [12, 3], [8, 15], [14, 7], [5, 15]]
-# #ans = 120
+#ans = 120
 
-# #t3
+#t3
 # sizes = [[14, 4], [19, 6], [6, 16], [18, 7], [7, 11]]
-# #ans = 133
+#ans = 133
 
-# ans = solution(sizes)
-# print(ans)
+ans = solution(sizes)
+print(ans)
