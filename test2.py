@@ -1,3 +1,8 @@
-print( 0 /2)
-cnt = [0 for i in range(5)]
-print(cnt)
+def solution(word):
+    
+    if len(word) != 5:
+        word += "_"*(5-len(word))
+        
+    print(word)
+
+solution('AAA')
