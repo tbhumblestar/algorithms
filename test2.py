@@ -1,3 +1,5 @@
-A = [1,2,4,2,6]
-A.sort(reverse=True)
+A = [(1,3),(4,2)]
+
+#reverse : 내림차순
+A.sort(key=lambda x:x[1],reverse=True)
 print(A)
