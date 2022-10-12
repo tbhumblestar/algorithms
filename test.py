@@ -1,27 +1,16 @@
-#문제종류 : 정렬
-#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/42748
+from bisect import bisect_left, bisect_right
 
-#풀이
-"""
--커맨드마다 for문을 돌림
--커맨드에 따라 array를 슬라이싱한 후, sort에서 answer리스트에 반환
-"""
-def solution(array, commands):
-    answer = []
-    
-    for i in commands:
-        # print(i)
-        t_array = array[i[0]-1:i[1]]
-        t_array.sort()
-        # print(t_array)
-        answer.append(t_array[i[2]-1])
-    
-    return answer
 
-#t1
-array = [1, 5, 2, 6, 3, 7, 4]
-commands = [[2, 5, 3], [4, 4, 1], [1, 7, 3]]	
-#res = [5, 6, 3]
+def count_by_value(a,left_val,right_val):
+    """
+    정렬된 배열 a 에서, left_val 이상, right_val 이하인 값들의 개수를 반환
+    """
+    left_index = bisect_left(a,left_val)
+    right_index = bisect_right(a,right_val)
+    return right_index-left_index
 
-ans = solution(array,commands)
-print(ans)
+a = [1,2,3,3,3,3,4,4,8,9]
+print(count_by_value(a,4,4))
+
+print(count_by_value(a,-1,3))
+
