@@ -19,10 +19,11 @@ m = int(input())
 find_arr = list(map(int,input().split()))
 
 arr.sort()
-print("here")
 def binary_search(arr,target,start,end):
     
-    
+    """
+    정렬된 배열에 대해서 이진탐색을 실행하고 찾지 못했을 경우 None을, 찾았을 경우 값이 존재하는 인덱스를 반환
+    """
     
     while start <= end :
         #중간점이 target일 경우
