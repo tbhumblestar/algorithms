@@ -1,56 +1,47 @@
-#문제종류 : 완전탐색
-#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/86491
+#문제종류 : 완전 탐색
 
 #풀이
 """
--N의 최대범위가 백만
--M의 최대 범위가 십만
--N을 처음에 정렬하는데 O(NlogN)가 필요
--M마다 N에 대한 이진탐색을 돌려야 하므로 O(MlogN)이 필요
--따라서 시간복잡도는 O((M+N)logN)이고
--최대일 때 1,100,000 * log1000000 = 1,100,000 * 20 = 22,000,000 정도 된다
--파이썬이 1초에 2천만 언저리로 계산할 수 있으므로 나쁘지 않음(비벼볼만 함)
+- 인덱스가 값보다 크다 > 기준 인덱스보다 인덱스가 큰쪽을 탐색
+- 인덱스가 값보다 작다 > 기준 인덱스보다 인덱스가 작은쪽을 탐색
 """
-
 
 n = int(input())
 arr = list(map(int,input().split()))
-m = int(input())
-find_arr = list(map(int,input().split()))
 
-arr.sort()
-def binary_search(arr,target,start,end):
+start = 0
+end = len(arr)-1
+
+fail = True
+
+while start <= end:
+    mid = (start + end) // 2
     
-    """
-    정렬된 배열에 대해서 이진탐색을 실행하고 찾지 못했을 경우 None을, 찾았을 경우 값이 존재하는 인덱스를 반환
-    """
+    if arr[mid] == mid:
+        print(mid)
+        fail = False
+        break
     
-    while start <= end :
-        #중간점이 target일 경우
-        
-        mid = (start + end) // 2
-        
-        if arr[mid] == target:
-            return mid
-        #중간점이 target보다 클 경우 > 오른쪽 확인
-        elif arr[mid] > target:
-            start = mid + 1
-        #중간점이 target보다 작을 경우 > 왼쪽 확인
-        else:
-            end = mid -1
-            
-    #while문 밖으로 나온다 > 일치하는 값이 없음
-    return None
+    elif arr[mid] > mid:
+        end = mid-1
+    
+    elif arr[mid] < mid:
+        start = mid +1
 
-for i in find_arr:
-    if binary_search(arr,i,0,len(arr)-1):
-        print("yes",end =' ')
-    else:
-        print("no",end = ' ')
-            
+if fail:
+    print(-1)
+        
+    
 
-#testcase
+
+# #testcase1
 # 5
-# 8 3 7 9 2
-# 3 
-# 5 7 9
+# -15 -6 1 3 7
+
+# #testcase2
+# 7
+# -15 -4 2 8 9 13 15
+
+# #testcase3
+# 7
+# -15 -4 3 8 9 13 15

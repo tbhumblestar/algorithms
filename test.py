@@ -1,44 +1,47 @@
-#문제종류 : 이진 탐색
+#문제종류 : 완전 탐색
 
 #풀이
 """
--떡을 자를 곳을 이진탐색으로 구하면 됨
--시작점을 0, 끝점을 떡들 중 가장 긴 떡의 길이로 해두고 이진탐색 ㄱ
+- 인덱스가 값보다 크다 > 기준 인덱스보다 인덱스가 큰쪽을 탐색
+- 인덱스가 값보다 작다 > 기준 인덱스보다 인덱스가 작은쪽을 탐색
 """
 
+n = int(input())
+arr = list(map(int,input().split()))
 
+start = 0
+end = len(arr)-1
 
-n,m = list(map(int,input().split()))
-f_lst = list(map(int,input().split()))
+fail = True
 
-def binary_search(arr,target,start,end):
+while start <= end:
+    mid = (start + end) // 2
     
-    while start <= end:
-        mid = (start+end) // 2
-        t_sum = 0
-        for i in f_lst:
-            if i > mid:
-                t_sum += (i-mid)
-                
-        print("mid :",mid)
-        print("t_sum :",t_sum)
-        
-        if target == t_sum:
-            #탐색 성공
-            return mid
-        elif target > t_sum:
-            end = mid -1
-        
-        else:
-            start = mid + 1
+    if arr[mid] == mid:
+        print(mid)
+        fail = False
+        break
     
-    #탐색결과 없음
-    return None
+    elif arr[mid] > mid:
+        end = mid-1
+    
+    elif arr[mid] < mid:
+        start = mid +1
 
-#test_case
-# 4 6
-# 19 15 10 17
-# ans = 15
+if fail:
+    print(-1)
+        
+    
 
-ans = binary_search(f_lst.sort(),m,0,max(f_lst))
-print("ans :",ans)
+
+# #testcase1
+# 5
+# -15 -6 1 3 7
+
+# #testcase2
+# 7
+# -15 -4 2 8 9 13 15
+
+# #testcase3
+# 7
+# -15 -4 3 8 9 13 15
