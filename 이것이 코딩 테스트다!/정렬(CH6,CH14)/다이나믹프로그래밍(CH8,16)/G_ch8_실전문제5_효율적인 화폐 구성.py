@@ -29,8 +29,7 @@ for i in range(1,m+1):
                 d[i] = min(d[i],d[i-money]) + 1
             else:
                 d[i] = d[i-money] + 1
-            
-print(d)
+
 
 if d[m] == 0:
     print(-1)
