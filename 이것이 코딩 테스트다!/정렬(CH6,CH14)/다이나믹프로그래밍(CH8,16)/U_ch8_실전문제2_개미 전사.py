@@ -18,19 +18,21 @@
 """
 
 n = int(input())
+lst = list(map(int,input().split()))
+
+length = len(lst)
+
+table = [0] * (length+1)
 
 
+table[0],table[1],table[2], = lst[0],lst[1],lst[2]
 
-table = [0] * (1001)
+for i in range(3,length):
+    table[i] = max(table[i-2],table[i-3]) + lst[i]
 
-
-table[0] = 1
-table[1] = 3
-
-for i in range(2,n):
-    table[i] = table[i-2] * 2 + table[i-1]
-
-print(table)
+print(max(table))
 
 
 #testcase
+# 4
+# 1 3 1 5 2 3
