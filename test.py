@@ -9,76 +9,38 @@
 
 #풀이법 설명
 """
--입력받은 값을 2차원배열리스트로 만듬
--2차원 배열리스트에서, 특정 원소의 값은 이전행 -1열, 이전행 0중 최대값임
--여기에 현재 행이 최외곽쪽에 있는지를 체크해주면 됨
+-생성되는 못생긴 수를 리스트에 넣음
+-못생긴 수에 2,3,5를 곱하면 그대로 못생긴 수가 나온다는 것을 이용해야 함
+-2,3,5가 인덱스를 가지고 잇으면서, 각자가 가진 인덱스에 2,3,5를 곱한 값들 중 가장 작은 값이 그 다음 값이 되어야 함
+-또한 중복을 배제하기 위해, 만약 값이 같다면, 같은 값들의 인덱스를 함께 증가시키도록 해야 함(그래서 elif가 아니라 if를 사용함!)
 """
-
 
 
 n = int(input())
 
+#값을 담을 칸
+ugly_num = [0]*(n+1)
 
-field = []
-#n+1이 되어야 함. 마지막 날에 시작한 일이 마지막 날에 끝날 수 있기 때문
-d = [0]*(n+1)
+#첫번째 값은 1
+ugly_num[1] = 1
 
-for i in range(0,n):
-    field.append(list(map(int,input().split())))
 
-max_val = 0
+index_2 = index_3 = index_5 = 1
+val_2 = 2
+val_3 = 3
+val_5 = 5
 
-for i in range(n-1,-1,-1):
-    print(i)
-    day, pay = field[i]
+for i in range(2,n+1):
+    ugly_num[i] = min(ugly_num[index_2]*val_2,ugly_num[index_3]*val_3,ugly_num[index_5]*val_5)
     
-    
-    #오늘날짜에 상담을 하면, 날짜가 초과되어서 일을 하지 못할 경우 > 기존의 값들 중 최고값을 얻는 수밖에 없음
-    if (i) + day > n:
-        d[i] = max_val
-        
-    
-    else:
-        #오늘 일을 할 수 있다면
-        if i  + day <=n:
-            d[i] = max(max_val,pay+d[i+day])
-            max_val = d[i]
-    print(d)
-
-
-#testcase1
-# 7
-# 3 10
-# 5 20
-# 1 10
-# 1 20
-# 2 15
-# 4 40
-# 2 200
-
-#testcase2
-# 10
-# 1 1
-# 1 2
-# 1 3
-# 1 4
-# 1 5
-# 1 6
-# 1 7
-# 1 8
-# 1 9
-# 1 10
-
-
-#testcase3
-# 10
-# 5 10
-# 5 9
-# 5 8
-# 5 7
-# 5 6
-# 5 10
-# 5 9
-# 5 8
-# 5 7
-# 5 6
+    if ugly_num[i] == ugly_num[index_2]*val_2:
+        print("2")
+        index_2 += 1
+    if ugly_num[i] == ugly_num[index_3]*val_3:
+        print("3")
+        index_3 += 1
+    if ugly_num[i] == ugly_num[index_5]*val_5:
+        print("5")
+        index_5 += 1
+    print(ugly_num)
+print(ugly_num[n])
