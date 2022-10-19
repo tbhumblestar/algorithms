@@ -1,5 +1,10 @@
+#문제종류 : 모의고사
+#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/42840
 
-
+#풀이
+"""
+-걍풀면됨 쉬움
+"""
 
 def solution(answers):
     
