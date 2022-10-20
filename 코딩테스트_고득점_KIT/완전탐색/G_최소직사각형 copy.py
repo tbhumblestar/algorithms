@@ -1,38 +1,49 @@
-#문제종류 : 모의고사
-#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/42840
+#문제종류 : 완전탐색
+#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/86491
 
 #풀이
 """
--걍풀면됨 쉬움
+-사이즈들 전체를 순회하면서, 가장 큰 변의 길이를 비교를 통해 얻고 + 지갑마다 작은 변을 리스트에 기록
+-가장 큰 변의 길이가 상자의 가로가 되고, 작은 변을 기록한 리스트들 중 가장 큰 값이 세로 변이 됨
+-이때 가장 큰 변의 길이를 가진 지갑의 나머지 변이, 기록된 작은 변들 중 가장 큰 값인지도 체크해야 함
 """
 
-def solution(answers):
+def solution(sizes):
     
-    p1 = [1,2,3,4,5]
-    p2 = [2,1,2,3,2,4,2,5]
-    p3 = [3,3,1,1,2,2,4,4,5,5,3,3]
+    max_size = 1
+    min_length_lst = []
+    index = 0
+    check_index = []
     
-    c1 = 0
-    c2 = 0
-    c3 = 0
     
-    n = len(answers)
-    for i in range(0,n):
-        if answers[i] == p1[i%5]:
-            c1+=1
-        if answers[i] == p2[i % 8]:
-            c2 += 1
-        if answers[i] == p3[i % 10]:
-            c3 += 1
-    
-    max_c = max(c1,c2,c3)
-    
-    answer = []
-    
-    for i,v in enumerate([c1,c2,c3]):
-        if v == max_c:
-            answer.append(i+1)
-            
-    return answer
+    for i in range(len(sizes)):
+        i_min = min(sizes[i])
+        i_max = max(sizes[i])
+        min_length_lst.append(i_min)
         
-print(solution([1,2,3,4,5]))
+        if max_size == i_max:
+            check_index.append(i)
+            
+        if i_max > max_size:
+            check_index = [i]
+            max_size = i_max
+        
+    #작은 변들 중 최댓값
+    min_length_max = max(min_length_lst)
+    answer = max_size*min_length_max
+    return answer
+
+#t1
+sizes = [[60, 50], [30, 70], [60, 30], [80, 40]]
+#ans = 4000
+
+#t2
+# sizes = [[10, 7], [12, 3], [8, 15], [14, 7], [5, 15]]
+#ans = 120
+
+#t3
+# sizes = [[14, 4], [19, 6], [6, 16], [18, 7], [7, 11]]
+#ans = 133
+
+ans = solution(sizes)
+print(ans)
