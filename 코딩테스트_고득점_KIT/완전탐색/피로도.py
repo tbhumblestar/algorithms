@@ -25,10 +25,6 @@ def solution(k, dungeons):
         max_cnt = max(max_cnt,cnt)
     
     return max_cnt
-        
-        
-        
-    
     
 
 #t1
