@@ -1,3 +1,5 @@
-a = '1'
-b = a[1:]
-print(b)
+from collections import deque
+
+a = deque([])
+if len(a) == 0:
+    print("as")
