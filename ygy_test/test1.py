@@ -59,15 +59,11 @@ def solution(stack1, stack2, stack3):
 # stack3 = [9]
 # res = 31
 
-#test4
-# stack1 = []
-# stack2 = []
-# stack3 = []
+# test4
+stack1 = []
+stack2 = []
+stack3 = []
 res = ''
 
-# test5
-stack1 = [9,9,9,9,9,9,9]
-stack2 = [9,9,9,9,9,9,9]
-stack3 = []
 
 print(solution(stack1,stack2,stack3))
