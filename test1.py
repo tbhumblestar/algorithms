@@ -1,39 +1,48 @@
 #문제종류 : 해시?
-#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/42577
+#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/43165?language=python3
 #풀이
 """
--문자열 정렬을 기억하는 게 중요함 : 문자열 정렬은 비교하는 두 문자열의 자릿수를 하나씩 비교함
+-n의 개수가 최대 20개 > 2^20은 백만이므로 완전탐색
+-각 숫자를 +,-하는 모든 경우의 수를 완전탐색으로 구함
 """
 
-from itertools import combinations
+from itertools import product
 
-def solution(phone_book):
+def solution(numbers, target):
     
-    phone_book.sort()
-    for i,v in enumerate(phone_book):
-        #마지막은 패스
-        if i == len(phone_book)-1:
-            return True
-        
-        #앞의 단어의 글자수가 더 길다면 매칭 실패임
-        pre_len = len(phone_book[i])
-        if pre_len <= len(phone_book[i+1]):
-            if phone_book[i+1][:pre_len] == phone_book[i]:
-                return False
-        print("for_end")
-    return True
-
+    cnt = 0
+    
+    #0은 -, 1은 +
+    lst = [0,1]
+    
+    product_lst = list(product(lst,repeat = len(numbers)))
+    # print(product_lst)
+    
+    for pro in product_lst:
+        val = 0
+        for i,v in enumerate(pro):
+            
+            if v == 0:
+                val -= numbers[i]
+            else:
+                val += numbers[i]
+                
+        # print(pro,val)
+        if val == target:
+            cnt += 1
+    
+    
+    return cnt
 
 #t1
-phone_book = ["119", "97674223", "1195524421"]
-res = False
+numbers = [1, 1, 1, 1, 1]	
+target = 3
+res = 5
 
 #t2
-phone_book = ["123","456","789"]
-res = False
+# numbers = [4,1,2,1]	
+# target = 4
+# res = 2
 
-#t3
-phone_book = ["12","123","1235","567","88"]
-res = False
 
-print(solution(phone_book))
+print(solution(numbers,target))
