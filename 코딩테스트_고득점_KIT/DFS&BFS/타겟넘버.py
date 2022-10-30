@@ -1,4 +1,4 @@
-#문제종류 : 해시?
+#문제종류 : dfs/bfs
 #링크 : https://school.programmers.co.kr/learn/courses/30/lessons/43165?language=python3
 #풀이
 """
