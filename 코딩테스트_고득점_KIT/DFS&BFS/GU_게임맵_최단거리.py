@@ -1,5 +1,9 @@
 #문제종류 : dfs/bfs
 #링크 : https://school.programmers.co.kr/learn/courses/30/lessons/1844
+
+#유용한 부분 : 첫 풀이를 dfs로 풀었으나 시간초과가 발생함 > bfs로 풀 수 있는 문제를 dfs로 풀면 더 많은 연산이 사용되므로 bfs로 풀 수 있으면 bfs로 풀자
+
+
 #풀이
 """
 #첫풀이 : dfs로 풀었었음 > 그러나 시간초과가 발생함 > bfs로 풀 수 있는 문제를 dfs로 풀면 반드시 시간초과가 남 ㅠㅠ
@@ -14,8 +18,6 @@ bfs를 사용
 해당 위치에 방문을 표시
 동서남북으로 이동한 위치 & 카운트를 1증가 큐에 넣음
 """
-
-
 
 from collections import deque
 
@@ -87,7 +89,5 @@ ans = 9
 #t4
 # maps = [[1,1,1,1,1],[0,0,0,0,1],[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1]]
 ans = 9
-
-
 
 print(solution(maps))
