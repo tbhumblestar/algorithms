@@ -19,75 +19,7 @@ bfs를 사용
 
 from collections import deque
 
-#동, 서 , 남, 북
-dx = [0,0,+1,-1]
-dy = [1,-1,0,0]
-
-def solution(maps):
-    
-    #세로 길이
-    n = len(maps)
-    #가로 길이
-    m = len(maps[0])
-    
-    #방문리스트
-    visited = [[0]*m for i in maps[:]]
-    
-    #시작점
-    queue = deque([[0,0,1]])
-
-    while queue:
-        x,y,cnt = queue.popleft()
-        
-        #최대횟수인 n*m를 넘어가면 종료
-        if cnt > n*m :
-            continue
-        
-        #칸을 넘어가면 함수종료
-        if x <0 or x >= n or y < 0 or y >= m :
-            continue
-        
-        #벽이면 종료
-        if maps[x][y] == 0:
-            continue
-        
-        #방문했으면 종료
-        if visited[x][y] != 0:
-            continue
-        
-        visited[x][y] = cnt
-        # print(x,y,cnt,visited)
-        # print(queue)
-        
-        if x == n-1 and y == m-1:
-            return cnt
-        
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            queue.append([nx,ny,cnt+1])
-            # print(queue)
-            
-
-    #도착하지 못했음
-    return -1
-
-#t1
-maps = [[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]
-ans = 11
-
-#t2
-# maps = [[1, 0, 1, 1, 1], [1, 0, 1, 0, 1], [1, 0, 1, 1, 1], [1, 1, 1, 0, 0], [0, 0, 0, 0, 1]]
-ans = -1
-
-#t3
-# maps = [[1,1,1,1,1],[0,0,0,0,1],[0,0,0,0,1],[0,0,0,0,1],[0,0,0,0,1]]
-ans = 9
-
-#t4
-# maps = [[1,1,1,1,1],[0,0,0,0,1],[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1]]
-ans = 9
-
-
-
-print(solution(maps))
+a = deque([1,2])
+print(a)
+b = a.popleft()
+print(a)
