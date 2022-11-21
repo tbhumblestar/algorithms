@@ -1,7 +1,2 @@
-from collections import deque
-
-queue = deque([[0,0,1]])
-
-print(queue)
-x,y,z = queue.pop()
-print(x)
+A = {1:2}
+print(A.get(3) <= 10)
