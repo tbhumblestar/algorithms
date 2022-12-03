@@ -1,5 +1,12 @@
+#문제종류 : 같은 숫자는 싫어
+#링크 : https://school.programmers.co.kr/learn/courses/30/lessons/42586
 
-
+#풀이
+"""
+-progress와 speed모두 queue형태로 만들어둠
+-progress queue 전체에 매번 speed를 더해주면서, progress의 첫번째 값이 100ㅇ넘으면 작업이 완성되었으므로 while문을 실행
+-while문 내부에서, 100이 넘는 값이 연달아있을 경우, progress_queue와 speed_queue에서 제거
+"""
 
 from collections import deque
 
