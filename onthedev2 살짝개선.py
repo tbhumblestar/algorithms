@@ -4,31 +4,25 @@ from time import sleep
 m,n = map(int,input().split())
 res_queue = deque([])
 
-sleep(2)
-print()
 
 for _ in range(n):
     action, size = input().split()
     size = int(size)
     
-    if action == 'deposit':
-        m += size
-        
-        
-        while res_queue and res_queue[0] <= m:
-            q = res_queue.popleft()
-            m -= q
-        
     if action == 'pay':
         if m >= size:
             m -= size
-            
+        continue
+
+    if action == 'deposit':
+        m += size
+        
     if action == 'reservation':
         res_queue.append(size)
         
-        while res_queue and res_queue[0] <= m:
-            q = res_queue.popleft()
-            m -= q
+    while res_queue and res_queue[0] <= m:
+        q = res_queue.popleft()
+        m -= q
     
     print(m,res_queue)
     

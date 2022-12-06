@@ -41,4 +41,3 @@ speeds = [1,1,1,1,1,1]
 res = [1,3,2]
 
 print(solution(progresses,speeds))
-

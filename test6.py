@@ -1,2 +1,3 @@
-A = '-123-'.replace('-','')
-print(A)
+a = [1,2,3,7,4]
+a.sort()
+print(a)
