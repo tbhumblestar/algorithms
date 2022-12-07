@@ -1,9 +1,10 @@
 """
 -기지국설치(https://school.programmers.co.kr/learn/courses/30/lessons/12979)
 -N을 일일이 계산하는 것은 너무 숫자가 많음
--따라서 숫자가 적은 station을 활용해 기지국이 닿는 곳을 계산
--그 후 닿지 않는 곳을 계산
-    이때 겹치는 곳들이 있다면 체크해서 합쳐줌
+-따라서 숫자가 적은 station을 활용해 기지국의 전력이 닿는 곳을 계산
+    이 과정에서 stack을 활용해 station이 인근에 있어 겹치는 곳이 있다면 합쳐줌
+-그 후 전력이 닿는 곳에 대한 값을 바탕으로 전력이 닿지 않는 곳을 계산
+    이때 맨 처음과 마지막 부분에 대해 체크해줘야 함
 -닿지 않는 곳들을, 기지국하나당 커버할 수 있는 영역(2w+1)로 나누서 더해줌
 """
 from math import ceil
@@ -39,16 +40,15 @@ def solution(n, stations, w):
         #시작부터 닿지 않는 곳이 있다면 체크
         if first_start > 1:
             not_save_places.append((1,first_start-1))
+
+        for idx,save_place in enumerate(save_places_stack):
             
-        if len(save_places_stack) >= 2:
-            for idx,save_place in enumerate(save_places_stack):
-                
-                if idx == 0:
-                    continue
-                
-                prev_end = save_places_stack[idx-1][1]
-                curr_start = save_places_stack[idx][0]
-                not_save_places.append((prev_end+1,curr_start-1))
+            if idx == 0:
+                continue
+            
+            prev_end = save_places_stack[idx-1][1]
+            curr_start = save_places_stack[idx][0]
+            not_save_places.append((prev_end+1,curr_start-1))
         
         #마지막에 닿지 않는 곳들이 있다면 체크
         if last_end < n:
