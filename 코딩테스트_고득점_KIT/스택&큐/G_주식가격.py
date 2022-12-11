@@ -40,3 +40,27 @@ def solution(prices):
 prices = [1, 2, 3, 2, 3]
 
 print(solution(prices))
+
+
+##풀이2
+"""
+-프로그래머스의 코드. 사실 이 코드가 훨씬 더 효율적임
+-stack구조를 활용
+-아래에서 사용한 stack에서 while문이 이해가 잘안갔음. 그런데 해당 stack은 잘 생각해보면 값이 오름차순으로 배정됨
+    즉 [1,2,8,3,4,5,6] 과 같은 식으로 값들이 들어가 있을 수 없다는 것
+    왜냐하면, 이 stack은 값이 내려가지 않은 값들을 저장하는 stack임. 즉 8 다음 3이 나왔다면 진작에 값이 내려간 게 되어서, 진작에 8은 사라지기 때문
+    그러한 부분을 잘 고려해보면서 아래의 while문의 조건을 생각해보면 , 아래 코드는 참 효율적인 정답코드임
+"""
+
+def solution(prices):
+    stack = []
+    answer = [0] * len(prices)
+    for i in range(len(prices)):
+        #앞에꼐 틀리면 뒤쪽은 실행하지 않음
+        while stack != [] and stack[-1][1] > prices[i]:
+            past, _ = stack.pop()
+            answer[past] = i - past
+        stack.append([i, prices[i]])
+    for i, s in stack:
+        answer[i] = len(prices) - 1 - i
+    return answer
