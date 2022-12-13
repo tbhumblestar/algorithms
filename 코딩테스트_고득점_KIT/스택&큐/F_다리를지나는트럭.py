@@ -32,30 +32,31 @@ def solution(bridge_length, weight, truck_weights):
         
         #도로가 비어있다면
         if not truck_on_bridge_que:
-            truck_on_bridge_que.append([bridge_length,truck_wait_que.popleft()])
-            weight_on_bridge += truck_on_bridge_que[-1][1]
-            time_cnt += 1
-    
+            
+                truck_on_bridge_que.append([bridge_length,truck_wait_que.popleft()])
+                weight_on_bridge += truck_on_bridge_que[-1][1]
+                time_cnt += 1
+        
     
         #도로가 비어있지 않음
         else:
-            #무게초과로 차를 추가할 수 없음 > 다리위의 차를 한대빼줌
-            if weight < truck_wait_que[0] + weight_on_bridge:
-                curr_time,curr_weight = truck_on_bridge_que.popleft()
-                time_cnt += curr_time
-                weight_on_bridge -= curr_weight
-                
-                #다리에서 나가는 트럭의 남은 시간을, 함께 다리위에 있는 모든 트럭들에서 빼줌
-                for truck in truck_on_bridge_que:
-                    truck[0] -= curr_time
-                
-            #무게가 초과되지 않아 차를 추가할 수 있음 > 다리위에 차를 추가
-            else:
-                #기다리는 트럭이 있으면
-                if truck_wait_que:
+            if truck_wait_que:
+                #무게초과로 차를 추가할 수 없음 > 다리위의 차를 한대빼줌
+                if weight < truck_wait_que[0] + weight_on_bridge:
+                    curr_time,curr_weight = truck_on_bridge_que.popleft()
+                    time_cnt += curr_time
+                    weight_on_bridge -= curr_weight
+                    
+                    #다리에서 나가는 트럭의 남은 시간을, 함께 다리위에 있는 모든 트럭들에서 빼줌
+                    for truck in truck_on_bridge_que:
+                        truck[0] -= curr_time
+                    
+                #무게가 초과되지 않아 차를 추가할 수 있음 > 다리위에 차를 추가
+                else:
+                    #기다리는 트럭이 있으면
                     truck_on_bridge_que.append([1+bridge_length,truck_wait_que.popleft()])
                     weight_on_bridge += truck_on_bridge_que[-1][1]
-                #없으면 걍 패스
+                    #없으면 걍 패스
                 
         print("truck_wait_que :",truck_wait_que)
         print("truck_on_bridge_que :",truck_on_bridge_que)
