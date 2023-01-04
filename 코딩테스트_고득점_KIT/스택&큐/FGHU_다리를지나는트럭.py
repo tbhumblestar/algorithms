@@ -14,6 +14,7 @@
 
 from collections import deque
 
+
 def weight_checker(new_truck, current_weight, cover_weight):
     """Check weight is over"""
     if new_truck + current_weight > cover_weight:
@@ -43,10 +44,10 @@ def solution(bridge_length, weight, truck_weights):
 
         else:  # 초과
             bridge_que.append(0)
-            
+
         print("check!")
 
-    ans = cnt + bridge_length #마지막 트럭이 올라선 시점에서 while문 종료되므로, 마지막 트럭이 다리위를 지나는 시간을 더해줘야 함
+    ans = cnt + bridge_length # 마지막 트럭이 올라선 시점에서 while문 종료되므로, 마지막 트럭이 다리위를 지나는 시간을 더해줘야 함
     return ans
 
 
@@ -56,13 +57,11 @@ weight = 10
 truck_weights = [7, 4, 5, 6]
 res = 8
 
-
 # t2
 bridge_length = 100
 weight = 100
 truck_weights = [10]
 res = 101
-
 
 # t3
 bridge_length = 100
