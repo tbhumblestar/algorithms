@@ -5,7 +5,6 @@
 """
 -새로운 괄호를, 가장 마지막으로 들어간 괄호와 비교해야함 > Stack활용
 """
-
 def solution(s):
 
     stack = []
@@ -20,7 +19,7 @@ def solution(s):
         else:
             stack.append(letter)
         
-    return True if len(stack) == 0 else False
+    return len(stack) == 0
 
 s = "()()"
 print(solution(s))
